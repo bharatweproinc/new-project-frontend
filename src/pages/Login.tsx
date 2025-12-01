@@ -4,8 +4,18 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+	const [form, setForm] = useState({ email: "", password: "" });
+
+	const handleChange = (key:string, value:string) => {
+		setForm((prevForm) => ({
+			...prevForm,
+			[key]: value
+		}));
+	}
+
+	const handleSubmit = () => {
+		console.log("form::", form);
+	}
 
 	return (
 		<div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -17,19 +27,19 @@ const Login: React.FC = () => {
 						id="email"
 						type="email"
 						placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+						value={form.email}
+						onChange={(e) => handleChange("email", e.target.value)}
 					/>
 					<Input
 						label="Password"
 						id="password"
 						type="password"
 						placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+						value={form.password}
+						onChange={(e) => handleChange("password", e.target.value)}
 					/>
 					<div className="flex items-center justify-between">
-						<Button type="button">Sign In</Button>
+						<Button type="button" onClick={handleSubmit}>Sign In</Button>
 						<Link
 							to="/signup"
 							className="font-medium text-primary-600 hover:text-primary-500"
