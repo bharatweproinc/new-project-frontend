@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
 	const [form, setForm] = useState({ email: "", password: "" });
+	const navigate = useNavigate();
 
 	const handleChange = (key:string, value:string) => {
 		setForm((prevForm) => ({
@@ -13,9 +16,30 @@ const Login: React.FC = () => {
 		}));
 	}
 
-	const handleSubmit = () => {
-		console.log("form::", form);
+	const handleSubmit = async () => {
+		const response = await api.post("/login", {
+			...form,
+		});
+
+		if (response.data.token) {
+			// Save token
+			localStorage.setItem("auth_token", response.data.token);
+
+			// Set Authorization header globally
+			api.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+			navigate("/dashboard");
+		}
+
+		return response.data;
 	}
+
+	useEffect(() => {
+		const token = localStorage.getItem("auth_token");
+		if (token) {
+			navigate("/dashboard");
+		}
+	}, []);
+
 
 	return (
 		<div className="flex items-center justify-center min-h-screen bg-gray-100">

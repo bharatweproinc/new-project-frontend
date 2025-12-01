@@ -4,14 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
-    const [session, setSession] = useState(null);
-
-    useEffect(() => {
-        setSession(session);
-    }, []);
+    // const [session, setSession] = useState(null);
+    const token = localStorage.getItem("auth_token");
 
     const handleGetStarted = () => {
-        if (session) navigate("/dashboard");
+        if (token) navigate("/dashboard");
         else navigate("/login");
     };
 
@@ -22,7 +19,7 @@ const Home = () => {
                 <h1 className="text-3xl font-bold">YourApp</h1>
 
                 <Button onClick={handleGetStarted}>
-                    {session ? "Dashboard" : "Login"}
+                    {token ? "Dashboard" : "Login"}
                 </Button>
             </header>
 
