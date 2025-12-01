@@ -16,7 +16,7 @@ const Home = () => {
         <div className="min-h-screen bg-gray-50 text-gray-900 border-red-300 border-2">
             {/* NAVBAR */}
             <header className="container mx-auto px-6 py-6 flex justify-between items-center">
-                <h1 className="text-3xl font-bold">YourApp</h1>
+                <h1 className="text-3xl font-bold">Your<span className="text-primary-500">App</span></h1>
 
                 <Button onClick={handleGetStarted}>
                     {token ? "Dashboard" : "Login"}
