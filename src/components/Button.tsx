@@ -10,9 +10,9 @@ interface ButtonProps
 
 const colorClasses: Record<string, any> = {
   primary: {
-    contained: "bg-teal-600 text-white hover:bg-teal-700",
-    outlined: "border border-teal-600 text-teal-600 hover:bg-teal-50",
-    text: "text-teal-600 hover:bg-teal-50",
+    contained: "bg-primary-600 text-white hover:bg-primary-700",
+    outlined: "border border-primary-600 text-primary-600 hover:bg-primary-50",
+    text: "text-primary-600 hover:bg-primary-50",
   },
   secondary: {
     contained: "bg-gray-600 text-white hover:bg-gray-700",
